@@ -15,5 +15,28 @@ public class Operation {
         System.out.println(result);
         System.out.println(myTrimString == result); //false
 
+
+        //toLower and toUpper
+        String name = "youness";
+        String upperName = name.toUpperCase();
+        System.out.println(upperName);
+        String lowerName = upperName.toLowerCase();
+        System.out.println(lowerName);
+
+        //concatenation
+        System.out.println(result.concat(" ").concat(lowerName));
+
+        //other methodes
+        String b = "";
+        System.out.println(b.isEmpty()); //true if b have white space it will return false
+        System.out.println(b.isBlank());
+
+        System.out.println("*".repeat(18));
+        b = " ";
+        System.out.println(b.isEmpty());//false
+        System.out.println(b.isBlank()); //true
+
+
+
     }
 }
