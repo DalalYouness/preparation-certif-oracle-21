@@ -1,0 +1,398 @@
+/* *********************************
+ *     Création d’un fichier JAR
+ * **********************************
+ * 1) Compilation
+ * ----------------
+ * On commence par compiler le code Java (code source).
+ * Pour cela, on utilise la commande javac en précisant :
+ *  - les classes Java à compiler
+ *  - le dossier de sortie des fichiers bytecode (.class) avec l’option -d
+ *  - le classpath avec l’option -cp, qui contient :
+ *      - les classes déjà compilées si nécessaire
+ *      - les dépendances utilisées (fichiers .jar), par exemple dans un dossier lib/
+ *
+ * Exemple :
+ * 1/ compilation  à la premiere fois
+ * javac -d bin -cp "lib/dependency.jar" src/com/example/Main.java
+ * 2/si y'as déja des classes compilé
+ * javac -d bin -cp "bin;lib/dependency.jar" src/com/example/Service.java
+ *
+ * 2) Exécution directe après compilation
+ * --------------------------------------
+ * Après la compilation, si on veut tester l’application sans créer de JAR,
+ * on utilise la JVM avec la commande java.
+ *
+ * La JVM a besoin de connaître : (mnin kangolo class path hiya ay blasa fiha les fichier .class yqdro ykono bzf)
+ *  - le classpath où se trouvent les fichiers .class compilés
+ *  - le classpath où se trouvent les dépendances (.jar)
+ *  - le nom complet (package + classe) qui contient la méthode main
+ *
+ * Exemple :
+ * java -cp "bin;lib/dependency.jar" com.example.Main
+ *
+ *
+ * 3) Génération d’un fichier JAR
+ * ------------------------------
+ * Après cela, on peut générer un fichier JAR du projet.
+ * Il existe deux cas principaux :
+ *
+ * 3.1) JAR simple (non totalement autonome)
+ * -----------------------------------------
+ * On génère un JAR qui contient uniquement les classes compilées du projet.
+ * Les dépendances (.jar) restent à l’extérieur.
+ *
+ * Exemple :
+ * jar cf myapp.jar -C bin .
+ *
+ * Pour l’exécution, la JVM devra toujours connaître :
+ *  - le JAR principal
+ *  - les JAR de dépendances (par exemple dans lib/)
+ *
+ * Exemple :
+ * java -cp "myapp.jar;lib/dependency.jar" com.example.Main
+ *
+ *
+ * 3.2) JAR exécutable avec Manifest
+ * --------------------------------
+ * On crée un JAR exécutable qui contient un fichier MANIFEST.MF
+ * placé dans META-INF/.
+ *
+ * Dans le MANIFEST, on déclare :
+ *  - Main-Class : le nom complet de la classe qui contient main
+ *  - Class-Path : le chemin des JAR de dépendances si elles sont externes
+ *
+ * Exemple de MANIFEST.MF :
+ * Manifest-Version: 1.0
+ * Main-Class: com.example.Main
+ * Class-Path: lib/dependency.jar
+ *
+ * Ensuite, on génère le JAR :
+ * jar cfm myapp.jar MANIFEST.MF -C bin . // . kat3ni haz hdchi li fl classpath o 7ato endi
+ * f le fichier jar
+
+ * Exécution :
+ * java -jar myapp.jar
+ *
+ *
+ * 3.3) Fat / Uber JAR (optionnel)
+ * -------------------------------
+ * Si on décompresse les JAR de dépendances et qu’on inclut leurs classes
+ * directement dans le JAR final, alors :
+ *  - il n’est plus nécessaire de déclarer Class-Path
+ *  - le JAR devient totalement autonome
+ *
+ * jar xf utils.jar on7ato fl classpath
+ *
+ * bonus :
+ *
+ * jar cf app.jar ...	إنشاء JAR
+jar tf app.jar	عرض محتوى JAR
+jar xf app.jar	استخراج محتوى JAR
+jar uf app.jar ...تحديثJAR  ...
+ *
+ *  JVM mnin katexecuter l fichier jar ila kant fl manifest
+ *  les jar chemin dyalhom kandeclareh bina2an ela fin kayn ana jvm katqlb elihom
+ *  ela fin kayn l jar file hiya kat executer fih
+
+ classpath kanqsdo bih ay blasa fiha les fichier .class li kathtaj jvm t executehom
+ */
+
+
+
+****************************************************************************************************
+
+ **************************************
+    Nonmodular Java Characteristique
+ **************************************
+
+
+ ✅ 1️⃣ packages
+
+ ✔️ صحيح
+
+ الـ packages غير تنظيم منطقي للكلاسات
+
+ ماشي آلية أمن
+
+ أي class public ➜ أي واحد يقدر يدير ليها import
+
+ 🔎 تصحيح صغير مهم:
+
+ الكلاسات غير public:
+
+ ما يمكنش يتستعملو مباشرة من package آخر
+
+ ولكن:
+ ✔️ تقدر تـ load الكلاس بالاسم ديالو
+ ✔️ وتكسر القيود بـ reflection
+
+ ➡️ يعني:
+
+ packages ما كيمنعوش الوصول الحقيقي، غير كيديرو تنظيم + convention
+
+ ✅ 2️⃣ jar
+
+ ✔️ صحيح 100%
+
+ JAR = container ديال bytecode
+
+ فيه:
+
+ .class
+
+ structure ديال packages
+
+ JVM تقدر توصل ليه غير إلا كان فـ classpath
+
+ ➡️ jar:
+
+ ما فيه لا security
+
+ لا isolation
+
+ لا rules
+
+ غير:
+
+ “ها فين راهوم الكلاسات”
+
+ ✅ 3️⃣ ربط الكلاسات ببعضها (deployment)
+
+ ✔️ صحيح
+
+ ما كاين حتى شي إجبار أن:
+
+ الكلاسات المرتبطة منطقياً يبقاو مع بعض
+
+ تقدر:
+
+ تحيد class
+
+ تولّد jar ناقص
+
+ JVM:
+
+ ما غاديش تكتاشف الخطأ حتى وقت التنفيذ
+
+ وكتطيح بـ ClassNotFoundException / NoClassDefFoundError
+
+ ➡️ قبل Java 9:
+
+ Architecture ما كتتفرضش، غير كتتمنّى 😅
+
+ ✅ 4️⃣ visibility
+
+ ✔️ صحيح
+
+ التحكم غير بـ:
+
+ public
+
+ protected
+
+ default
+
+ private
+
+ هاد الشي:
+
+ على مستوى class
+
+ ماشي على مستوى package ↔ package ولا jar ↔ jar
+
+ ➡️ access modifiers ما كافيينش باش تفرض design نظيف
+
+ ✅ 5️⃣ encapsulation
+
+ ✔️ كلامك دقيق
+
+ encapsulation فـ Java قبل 9:
+
+ قابلة للكسر
+
+ reflection:
+
+ Class.forName
+
+ setAccessible(true)
+
+ توصل حتى لـ private
+
+ 😄 و"قضي الغرض" جات فبلاصتها 👌
+
+ ➡️ يعني:
+
+ encapsulation كانت أكثر اتفاق أخلاقي من كونها حماية حقيقية
+
+ ✅ 6️⃣ constraints بين packages
+
+ ✔️ صحيح تماماً
+
+ ما تقدرش تقول:
+
+ “هاد package يخدم غير مع هاد package”
+
+ ما كاينش:
+
+ rules
+
+ boundaries
+
+ contracts enforced by JVM
+
+ 🧠 الخلاصة النهائية (قبل Java 9)
+
+ ✔️ packages = تنظيم
+ ✔️ jar = تغليف
+ ✔️ classpath = بحث
+ ❌ security حقيقية
+ ❌ architecture enforced
+ ❌ isolation
+
+ ولهذا Java 9 Modules (JPMS) جاو باش:
+
+ يفرضو boundaries
+
+ يسدو reflection
+
+ يتحكمو فـ access
+
+ يحلو classpath hell
+
+ إذا بغيت، الخطوة المنطقية دابا هي:
+ ➡️ نقارن كل نقطة كتبتيها بـ كيفاش تحلات فـ Java Modules
+ وهادي غادي تخليك فعلاً تفهم علاش module-info.java ماشي مجرد syntax.
+
+ قولي:
+ “شرح modules بنفس الطريقة” ونكمل 👌
+
+
+************************************************************************
+****************************
+    module definition
+****************************
+
+تعريف الـ Module (فـ Java)
+
+الـ Module هو وحدة رسمية فـ Java كتجمع:
+
+مجموعة ديال packages
+
+مع قواعد صريحة كتحدد:
+
+شكون يقدر يستعمل هاد الكود
+
+وشنو بالضبط مسموح يتشاف ويتستعمل
+
+بكلمة وحدة:
+
+Module = packages + boundaries + rules مفروضة من JVM
+
+donc l modules jaw bach ykhalqo lma3na l7a9i9i dyal encapsulation
+fhala galti jaw bach maykhaliwch danya mtar3a , fhala chi blasa
+ fiha danya sayba matalan chi entreprise chi dakhl end chi jaw
+ l module nadmo dkchi wala dkchi organiser chkoun li yqdr ydkhol
+  end chkoun o kol modules kayjm3 whd l mjmo3a dyal packages
+ o kaygolihom ha les packages li tqdro tchoufo o ha chno ana m7taj ...
+
+ les modules majawch ghir bach ydiro organisation logique l les packages non
+ organisation physique anaho nit kayna l encapsulation donc la jvm hiya walat
+ farda hdchi hiya li kadrab tlayla katchouf danya wach mqada
+
+ dans java apis rah package ola ghir class katqdm khdma rah katsma api
+
+
+ **********************************************************************************************************
+            * what is module (rah bayna)
+ **************************************
+        java modules
+***************************************
+
+https://chatgpt.com/g/g-p-69753a09f7208191962035e67c4a352d-modules/c/69753c67-c378-832b-b26d-55f505f2e7d3
+module-path class-path walat la jvm f module-path qbal matbda t executer
+kadrab dwayra ela l modules tchouf wach dkchi mzn 3ad tbda texecute bach kadman
+anaho maghaytra hta mochkil f runtime machi fhal fl classpath katbda bla sowalat
+
+**************************************
+        jdk module
+**************************************
+jdk mabqatch monolithique walat modules
+wala db software dyalk tqdr tsyb lih jar fih ghir
+dkchi li baghi man jdk mais ghan7tajo whd l7aja smitha jlink
+
+ay modules implicilty rah kaydir requirs l java.base man jdk
+blama t7taj tktbha hit fih ga3 l apis de base
+o au meme temps ghadi dkhol ghir ldkchi li howa dayr lih export full encapsulation
+
+*******************************************
+        requirs wad7a mzn f slide
+*******************************************
+
+********************************************
+        exports wad7a hta hiya f slide
+********************************************
+export rah kat texporter ghir l public content
+ama non public rah hta bl reflexion maymknch
+
+
+important : dima multiple modules ola pavkages nst3ml comma
+
+man l2a7san le nom dial le module ikoun howa smiya dyal les deux premiers package
+haka kandamno anaho ghaykon unique
+
+open o opens kankhdmo biha bzf mea spring hit spring kaykhdm
+b reflexion kankhaliw lih la possibilité anaho
+ydir injection ola ycreer les beans
+
+klmat api rah ay haja katmtl wajiha o l implemntato=ion dualha
+katkon abstraction bnisba liya kan3tbrha api
+
+modules = packages + rules
+rah dkchi elach l module-path howa ay haja fih du code compilé mais avec des module-info
+avec des contraints , des jars des apis contient des apis et des classes mais y'as
+des contraints , makayanach utilisation 3achwa2iya
+jvm bach dir l execution kathtaj classpath fin kaynin ga3 les fichier
+.class li m7taja o kaykono m organisyin logiquement f des package
+comme les jars le class path du projet , mais module path c'est un class path
+encapsuler dans des modules c'est pour ca la jvm l'execution de module-path
+est different parceque il se base sur les regles mentionéé dans les module-info
+avant l'execution
+
+******************************************
+        multirelease jar
+******************************************
+https://chatgpt.com/g/g-p-69753a09f7208191962035e67c4a352d-modules/c/6975e885-eb84-8330-b73c-acb484bb9e1f
+kanla7do bali la jvm mnin kat executer lprogramme lclasspath makan7tjoch
+ndelarew les apis dyal jdk hit endha builtin dkchi , boostrap classpath
+o qadiya la kant l projet dyali ana khdam b java17 o drt compilation ola execution
+b java 8 matalan rahc'est normal itra mochkil hit java 8 compatible mea jdk apis
+dyal java8
+
+!!! classpath rah blasa katqlb fih jvm ela ga3 l .class -cp kat3ni rah ga3 dkchi
+li .class mjmo3 hna ola kanqdr ndeclarer variable d'envie smitha classpath
+o n7at fiha ga3 les chemins li (chemins + jars..) fin katmchi la jvm
+
+https://gemini.google.com/app/4d767771b4215970?hl=fr mohim
+
+***************************************************
+      compile projects base on modules
+***************************************************
+https://chatgpt.com/g/g-p-69753a09f7208191962035e67c4a352d-modules/c/6975eedb-6b34-8325-9ba8-6b9ad18e17b1
+
+--describe-module -<module name> hadi ghir debug tool kat afficher l content dyal module-info
+dyal l module ila bghiti t3rf chno fih
+
+
+
+modules rah yqdr ykono f blasa whda "same application folder kifma l'exemple li dayr ana"
+ola yqdro les devlopeur kol devloppeur ydevloper module bohdo fhal les microservice
+
+
+open module howa module kaykhali les modules lakhirn ywslo l ay haja fih via reflexion
+public et non-public mais machi fhal opens makexportehom ghir reflexion
+
+-- provider dyal service rah yqdr ykono endo bzf dyal les implemntation
+kaydir matalan with classImpl,classImpl1
+
+https://gemini.google.com/app/1fe83d765deea72b?hl=fr hada mzn ela mcompilation et
+le packaging fih l parte lkhra fl course kamla
