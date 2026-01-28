@@ -38,7 +38,7 @@ public class TestBigDecimal {
         //RoundingMode on doit le specifier si on precise le scale et si on veut apple la methode devide
         /*on a 3 Rounding Mode
         *
-        * 1 - HALF_DOWN hada une fois kat7adad scale kaydir trancate l dkchi li zayd sff
+        * 1 - HALF_DOWN hada fha roudn l3adi ghir hiya ila 5 kayhabat makaytl3ch machi fhal lup
         * 2 - UP hada ay haja wra scale kayakhodha b 3ayn l3ibar o kayzid wahd
         * 3 - HALF_UP normale rounding
         * 4 - EVEN ila kan raqm li wra fin bghina nhabso < 5 kanhabto
@@ -47,5 +47,21 @@ public class TestBigDecimal {
         *     kan fardi kantal3o bach nrdhoh zawji
         *
         * */
+
+        //UP comme le ceil
+        System.out.println(new BigDecimal("123.122").setScale(2, RoundingMode.UP));
+
+        //HALF_UP comme le round ( HALF = 5 UP si a dire man egale l half 5 lfo9 tala3)
+        System.out.println(new BigDecimal("123.124").setScale(2, RoundingMode.HALF_UP));
+
+        //HALF_DOWN comme ( HALF = 5 UP si a dire man egale 5 lta7t habat)
+        System.out.println(new BigDecimal("123.125").setScale(2, RoundingMode.HALF_DOWN));
+
+        //HALF_EVEN (HALF + EVEN cad mnin ykon lhalf howa raq li wra fin scalina nchouf raqm li qbal kanzawji nkhaliwh kan fardi ntal3oh bach ywali zwji
+        // sf o dkchi lakhor kaybqa 3adi ila makanch 5 ya3ni sghar man 5 nhabto kbar man 5 ntal3o
+        System.out.println(new BigDecimal("123.136").setScale(2, RoundingMode.HALF_EVEN));
+
+
+
     }
 }
