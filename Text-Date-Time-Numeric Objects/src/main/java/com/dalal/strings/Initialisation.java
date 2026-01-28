@@ -2,7 +2,7 @@ package com.dalal.strings;
 
 import java.awt.*;
 
-public class Test {
+public class Initialisation {
     public static void main(String[] args) {
         //diff between string new and string literals
 
