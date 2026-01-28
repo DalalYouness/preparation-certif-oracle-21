@@ -30,6 +30,7 @@ public class TestWrapper {
         float fp = f;
         System.out.println(fp);
 
+
         //le cas d'exception nullpointerexception
         System.out.println("*".repeat(20));
         Integer n = null;
@@ -40,6 +41,24 @@ public class TestWrapper {
 
         System.out.println(ex);
 
+        /*
+        * Wrapper classes sont final , elles heritenet la class Number
+        *
+        * */
+
+
+        System.out.println("*".repeat(20));
+        /*quelque operation*/
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Integer.MIN_VALUE);
+        System.out.println(Integer.max(Integer.MAX_VALUE, Integer.MIN_VALUE));
+        System.out.println(Integer.min(Integer.MAX_VALUE, Integer.MIN_VALUE));
+        System.out.println(Integer.parseInt("10"));
+
+        //convert a primitive to string
+        System.out.println(String.valueOf(20) + 20);
+
+        //si y'as plusieur d'autoboxing et autounboxing ca va diminuer la performance de l'app parce que y'a un traitement derriere ca
 
 
     }
