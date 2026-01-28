@@ -42,7 +42,7 @@ public class TestWrapper {
         System.out.println(ex);
 
         /*
-        * Wrapper classes sont final , elles heritenet la class Number
+        * Wrapper classes sont final , elles heritenet la class Number, et ils sont immutable
         *
         * */
 
