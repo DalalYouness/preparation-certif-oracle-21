@@ -41,7 +41,20 @@ public class MyZoneDateTime {
         Instant instant = localDateTime.atZone(zoneId).toInstant();
         System.out.println(instant);
 
+        System.out.println("#".repeat(20));
         // baqi liya withZoneSameLocal & SameInstant
+        LocalDateTime localDateTime1 = LocalDateTime.now();
+        System.out.println(localDateTime1);
+        ZonedDateTime zonedDateTime1 = localDateTime1.atZone(zoneId);
+        System.out.println("ZoneDateTime [Canada]: ".concat(zonedDateTime1.toString()));
+        ZonedDateTime withZoneJapanLocal = zonedDateTime1.withZoneSameLocal(ZoneId.of("Japan"));
+        System.out.println("ZoneDateTime [Japan]:" + withZoneJapanLocal);
+        ZonedDateTime withZoneJapanInstant =  zonedDateTime1.withZoneSameInstant(ZoneId.of("Asia/Tokyo"));
+        //donc hna li ghaytra howa java ghatchad dak la date ghat3trj3o instant bnisba l anaha f canada ya3ni ghadi tnqos mano -5h (hit canada UTC-5)
+        //apres ghadi zid elih 9h hit japan hit japan (YTC+9)
+        //natija ghada tkon (11 - (-5) + 9 = 16 + 9 = 25 = 01:00
+        System.out.println("ZoneDateTime [Japan]:" + withZoneJapanInstant);
+
 
     }
 }
