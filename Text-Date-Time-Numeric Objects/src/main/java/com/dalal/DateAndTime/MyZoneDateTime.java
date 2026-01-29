@@ -53,6 +53,7 @@ public class MyZoneDateTime {
         //donc hna li ghaytra howa java ghatchad dak la date ghat3trj3o instant bnisba l anaha f canada ya3ni ghadi tnqos mano -5h (hit canada UTC-5)
         //apres ghadi zid elih 9h hit japan hit japan (YTC+9)
         //natija ghada tkon (11 - (-5) + 9 = 16 + 9 = 25 = 01:00
+        //zonedatetime - utc(prevZone) + utc(currentZone)
         System.out.println("ZoneDateTime [Japan]:" + withZoneJapanInstant);
 
 
