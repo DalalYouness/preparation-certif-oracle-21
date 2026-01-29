@@ -55,6 +55,9 @@ public class NumericValues {
         * et j'appelle parse qui retourn Number
         *
         *
+        * donc NumberFormat fait le format et le parsing
+        *
+        *
         *
         * */
 
