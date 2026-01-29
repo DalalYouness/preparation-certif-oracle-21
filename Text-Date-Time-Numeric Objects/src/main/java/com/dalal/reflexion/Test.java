@@ -17,7 +17,7 @@ public class Test {
         firstNameField.set(person,"youness");
         lastNameField.set(person,"dalal");
 
-        System.out.println(firstNameField.get(person));
-        System.out.println(lastNameField.get(person));
+        System.out.println((String)firstNameField.get(person));
+        System.out.println((String)lastNameField.get(person));
     }
 }
