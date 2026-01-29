@@ -18,12 +18,15 @@ public class Localisation {
         System.out.println(Locale.getDefault());
         Locale locale = new Locale("en", "US");
         //or
-        Locale locale1 = Locale.of("ar-MA");
+        Locale locale1 = Locale.of("ar","MA");
         System.out.println(locale1);
 
-        //with lang seulement (on constate que a la base le of accept language donc - pour ajouter le pays est optionnel
+        //with lang seulement
         Locale locale2 = Locale.of("ar");
         System.out.println(locale2);
+
+        //enums
+        System.out.println(Locale.FRANCE);
 
 
     }

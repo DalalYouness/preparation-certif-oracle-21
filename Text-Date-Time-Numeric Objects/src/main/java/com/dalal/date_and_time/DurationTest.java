@@ -1,4 +1,4 @@
-package com.dalal.DateAndTime;
+package com.dalal.date_and_time;
 
 import java.time.Duration;
 import java.time.LocalTime;

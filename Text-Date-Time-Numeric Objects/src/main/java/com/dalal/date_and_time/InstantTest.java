@@ -1,4 +1,4 @@
-package com.dalal.DateAndTime;
+package com.dalal.date_and_time;
 
 // On importe la classe Instant qui fait partie de l'API java.time
 // Elle permet de représenter un point précis dans le temps (timestamp) en UTC
