@@ -57,5 +57,8 @@ public class MyZoneDateTime {
         System.out.println("ZoneDateTime [Japan]:" + withZoneJapanInstant);
 
 
+        //get ZoneId from my system
+        System.out.println(ZoneId.systemDefault());
+
     }
 }
