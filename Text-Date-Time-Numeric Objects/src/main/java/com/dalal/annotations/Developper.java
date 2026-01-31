@@ -2,12 +2,12 @@ package com.dalal.annotations;
 
 import java.lang.annotation.*;
 
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.RUNTIME) // reservation ou bien 7ifd en arabe // discarded takhalos
 /*La retention de l'annotation retention ila reste jusqu'a le runtime*/
 @Target({ElementType.FIELD,ElementType.TYPE})
 @Inherited
 public @interface Developper {
-    String code(); // je veux savoir le code du développeur
+    String code() default "A20"; // je veux savoir le code du développeur
     int experience(); // je veux savoir combien d'expérience a ce développeur
 }
 
@@ -63,7 +63,19 @@ public @interface Developper {
  *
  * (test dans la classe Test
  *
+ * **************************************************
+ *  keyword default
+ *  par ex : String code default "A60"
+ * hna les informations kan3tihom par default
+ * haka l'annotation wakha kanktbha maghat3tinich error
+ * ila f 7alat ila kano la kant ta whda fihom ma default
+ * ola le machi kamlin fih defaulr
+ * kan7tajoha la kna baghi des infos déja 3arfinhom kan7thom au moment dyal creation
+ * dyal l'annotation bach ntfadaw la redondonce
 *
+* ila kano les attributs dyal les annotations fihom whd smito value o howa li machi default o bghiti
+* tktbo f imkank tktbo mobachara blama dir value = hit aslan had l parametre kayn par defaulr
+* mais ila zdti meaha 7aja akhra khasna ndiro value explicitement
 *
 *
 * */
