@@ -1,5 +1,9 @@
 package com.dalal.annotations;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Developper {
     String code(); // je veux savoir le code du développeur
     int experience(); // je veux savoir combien d'expérience a ce développeur
