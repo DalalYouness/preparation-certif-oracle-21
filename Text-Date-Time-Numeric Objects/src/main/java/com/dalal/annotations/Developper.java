@@ -1,13 +1,11 @@
 package com.dalal.annotations;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
 /*La retention de l'annotation retention ila reste jusqu'a le runtime*/
 @Target({ElementType.FIELD,ElementType.TYPE})
+@Inherited
 public @interface Developper {
     String code(); // je veux savoir le code du développeur
     int experience(); // je veux savoir combien d'expérience a ce développeur
@@ -57,6 +55,13 @@ public @interface Developper {
  * *************************************************************************************
  *      Inherited ( pour definir est ce que les annotations est hérité par les classes filles
  *
+ *  - si je veux que les classes filles herite une annotations dans la classe
+ * mere j'ajoute dans l'annotation creer l'annotation inherited
+ *
+ * - si non je l'ajoute pas dans ce cas , je dois aussi dans les classes filles
+ * ajouter l'nnotation manuellement
+ *
+ * (test dans la classe Test
  *
 *
 *
