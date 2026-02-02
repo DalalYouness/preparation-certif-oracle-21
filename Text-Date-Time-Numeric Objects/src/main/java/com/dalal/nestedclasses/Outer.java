@@ -30,7 +30,20 @@ public class Outer {
 
     private void  nonStaticMethod() {
         System.out.println("Non-static method");
+        int x = 0;
     }
+
+     public int sum(int a, int b) {
+        int x = 10; //effectively final
+
+        class Adder {
+            int sum(int a, int b) {
+                return (a + b) * x;
+            }
+        }
+        Adder adder = new Adder();
+        return adder.sum(a, b);
+     }
 
 
 
@@ -46,6 +59,7 @@ public class Outer {
         Outer.NonStaticNested nonStaticNested = outer.new NonStaticNested();
         nonStaticNested.hello();
 
+        System.out.println(outer.sum(10, 20));
     }
 }
 
@@ -57,3 +71,15 @@ public class Outer {
 //pas de this vers la classe outer parceque c'est static , par contre non-static
 //inner class la classe outer independent du classe inner
 //mais le inner non le inner classe est lié a la classe outer c'est dire possede un this vers cette la classe outer
+
+
+/*
+* local classe
+*
+* c'est une classe declarer directement dans la methodes si on veut l'utilisé tmporement seulement au niveau de la methode de
+* outer classe mais la chose la plus importante c'est ca :
+* c'est que les variables locaux definient avant le local classe implicitement effectively final
+* ce qui est logique
+*
+*
+* */
