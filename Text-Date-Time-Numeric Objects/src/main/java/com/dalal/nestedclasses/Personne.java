@@ -74,4 +74,6 @@ class Test {
     * fhala  galti 3tatna la possibilté 7na li walina kan passew un comportement makaybqach l object li kaykhtar
     * kaywli flexible
     * */
+
+    Comparable
 }
