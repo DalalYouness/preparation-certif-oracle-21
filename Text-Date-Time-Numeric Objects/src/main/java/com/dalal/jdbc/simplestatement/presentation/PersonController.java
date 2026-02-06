@@ -24,4 +24,8 @@ public class PersonController {
         if (person == null) return;
         personService.addPerson(person);
     }
+    public Person getPersonById(int id) throws SQLException {
+        if (id <= 0) return null;
+        return personService.getPersonById(id);
+    }
 }

@@ -45,23 +45,31 @@ public class Test {
     public static void main(String[] args) throws SQLException {
         PersonServiceImpl personService = new PersonServiceImpl(new PersonDaoImpl());
         PersonController personController = new PersonController(personService);
-        personController.AllPersons();
+//        personController.AllPersons();
+//
+//        System.out.println("************************************");
+//        System.out.println("\t\taddPerson");
+//        System.out.println("************************************");
+//
+//        Person person = readPersonInfo();
+//        personService.addPerson(person);
+//        personController.AllPersons();
+//
+//        System.out.println("************************************");
+//        System.out.println("\t\tdelete person");
+//        System.out.println("**********************************");
+//
+//        Integer id = readPersonId();
+//        personService.deletePersonById(id);
+//        personController.AllPersons();
 
-        System.out.println("************************************");
-        System.out.println("\t\taddPerson");
-        System.out.println("************************************");
+        System.out.println("**************************************");
+        System.out.println("\t\tfind person by id:");
+        System.out.println("***************************************");
 
-        Person person = readPersonInfo();
-        personService.addPerson(person);
-        personController.AllPersons();
+        System.out.println(personController.getPersonById(readPersonId()));
 
-        System.out.println("************************************");
-        System.out.println("\t\tdelete person");
-        System.out.println("**********************************");
 
-        Integer id = readPersonId();
-        personService.deletePersonById(id);
-        personController.AllPersons();
 
 
     }

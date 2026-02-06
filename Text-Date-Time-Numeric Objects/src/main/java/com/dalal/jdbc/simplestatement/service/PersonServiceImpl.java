@@ -33,8 +33,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person getPersonById(int id) {
-        return null;
+    public Person getPersonById(int id) throws SQLException {
+        Person person = personDao.getPersonById(id);
+        if (person == null) return null;
+        return person;
     }
 
     @Override
