@@ -15,8 +15,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void addPerson(Person person) {
-
+    public void addPerson(Person person) throws SQLException {
+        if (person == null) return;
+        personDao.addPerson(person);
     }
 
     @Override

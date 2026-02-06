@@ -20,4 +20,8 @@ public class PersonController {
         }
         System.out.println("**************************");
     }
+    public void addPerson(Person person) throws SQLException {
+        if (person == null) return;
+        personService.addPerson(person);
+    }
 }

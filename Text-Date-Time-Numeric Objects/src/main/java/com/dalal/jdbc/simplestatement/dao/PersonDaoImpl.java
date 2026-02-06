@@ -12,10 +12,31 @@ import java.util.List;
 
 public class PersonDaoImpl implements PersonDao {
     private static Connection connection = ConnectionSingleton.getConnection();
-    private static Statement statement = null;
+    private static Statement statement;
+
+    static {
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
-    public void addPerson(Person person) {
+    public void addPerson(Person person) throws SQLException {
+
+        String insertQuery =
+                "INSERT INTO personnes (id, firstName, lastName, age) VALUES (" +
+                        person.getId() + ",'" +
+                        person.getFirstName() + "','" +
+                        person.getLastName() + "'," +
+                        person.getAge() + ")";
+        int rows = statement.executeUpdate(insertQuery);
+        if (rows != 1) {
+            throw new SQLException("insert error");
+        }
+
+
     }
 
     @Override
@@ -36,7 +57,6 @@ public class PersonDaoImpl implements PersonDao {
     @Override
     public List<Person> getAllPersons() throws SQLException {
         String query = "select * from personnes";
-        statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         List<Person> persons = new ArrayList<>();
         while (resultSet.next()) {

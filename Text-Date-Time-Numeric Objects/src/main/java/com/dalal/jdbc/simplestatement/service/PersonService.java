@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface PersonService {
-    public void addPerson(Person person);
+    public void addPerson(Person person) throws SQLException;
     public void updatePerson(Person person);
     public void deletePersonById(int id);
     public Person getPersonById(int id);

@@ -8,6 +8,7 @@ import com.dalal.jdbc.simplestatement.presentation.PersonController;
 import com.dalal.jdbc.simplestatement.service.PersonServiceImpl;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
 /*
 * ma3loma mohima rah les interfaces rah homa contract mais ahsan definition
@@ -18,10 +19,35 @@ import java.sql.SQLException;
 *
 * */
 public class Test {
+
+    public static Person readPersonInfo() throws SQLException {
+        Scanner sc = new Scanner(System.in);
+
+        Person person = new Person();
+        System.out.println("enter your first name:");
+        person.setFirstName(sc.next());
+
+        System.out.println("enter your last name:");
+        person.setLastName(sc.next());
+
+        System.out.println("enter your age:");
+        person.setAge(sc.nextInt());
+        return person;
+
+    }
     public static void main(String[] args) throws SQLException {
         PersonServiceImpl personService = new PersonServiceImpl(new PersonDaoImpl());
         PersonController personController = new PersonController(personService);
         personController.AllPersons();
+
+        System.out.println("************************************");
+        System.out.println("\t\taddPerson");
+        System.out.println("************************************");
+
+        Person person = readPersonInfo();
+        personService.addPerson(person);
+        personController.AllPersons();
+
 
     }
 }

@@ -1,16 +1,16 @@
 package com.dalal.jdbc.simplestatement.entites;
 
 public class Person {
-    private int id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private int age;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
