@@ -23,7 +23,11 @@ public class Test {
     public static Person readPersonInfo() throws SQLException {
         Scanner sc = new Scanner(System.in);
 
+
         Person person = new Person();
+        System.out.println("enter the id of the person you want to update");
+        person.setId(sc.nextInt());
+
         System.out.println("enter your first name:");
         person.setFirstName(sc.next());
 
@@ -45,7 +49,7 @@ public class Test {
     public static void main(String[] args) throws SQLException {
         PersonServiceImpl personService = new PersonServiceImpl(new PersonDaoImpl());
         PersonController personController = new PersonController(personService);
-//        personController.AllPersons();
+
 //
 //        System.out.println("************************************");
 //        System.out.println("\t\taddPerson");
@@ -63,11 +67,29 @@ public class Test {
 //        personService.deletePersonById(id);
 //        personController.AllPersons();
 
-        System.out.println("**************************************");
-        System.out.println("\t\tfind person by id:");
-        System.out.println("***************************************");
+//        System.out.println("**************************************");
+//        System.out.println("\t\tfind person by id:");
+//        System.out.println("***************************************");
+//
+//        System.out.println(personController.getPersonById(readPersonId()));
 
-        System.out.println(personController.getPersonById(readPersonId()));
+        System.out.println("************************************");
+        System.out.println("\t\tALL PERSONS");
+        System.out.println("************************************");
+
+        personController.AllPersons();
+
+        System.out.println("**************************************");
+        System.out.println("UPDATE PERSONS");
+        System.out.println("*************************************");
+        personController.updatePerson(readPersonInfo());
+
+        System.out.println("************************************");
+        System.out.println("\t\tALL PERSONS");
+        System.out.println("************************************");
+
+        personController.AllPersons();
+
 
 
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PersonDao {
     public void addPerson(Person person) throws SQLException;
-    public void updatePerson(Person person);
+    public void updatePerson(Person person) throws SQLException;
     public void deletePersonById(int id) throws SQLException;
     public Person getPersonById(int id) throws SQLException;
     public List<Person> getAllPersons() throws SQLException;

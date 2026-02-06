@@ -28,4 +28,8 @@ public class PersonController {
         if (id <= 0) return null;
         return personService.getPersonById(id);
     }
+    public void updatePerson(Person person) throws SQLException {
+        if (person == null) return;
+        personService.updatePerson(person);
+    }
 }

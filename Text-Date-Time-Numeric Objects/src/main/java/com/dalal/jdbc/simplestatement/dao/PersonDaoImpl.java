@@ -38,8 +38,16 @@ public class PersonDaoImpl implements PersonDao {
     }
 
     @Override
-    public void updatePerson(Person person) {
-
+    public void updatePerson(Person person) throws SQLException {
+        String updateQuery = "UPDATE PERSONNES " +
+                "SET firstName='" + person.getFirstName() +
+                "', lastName='" + person.getLastName() +
+                "', age=" + person.getAge() +
+                " WHERE id = " + person.getId();
+        int updatedRow = statement.executeUpdate(updateQuery);
+        if (updatedRow != 1) {
+            throw new SQLException("update error");
+        }
     }
 
     @Override

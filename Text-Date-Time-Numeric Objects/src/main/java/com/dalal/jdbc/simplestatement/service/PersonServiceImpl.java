@@ -21,8 +21,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void updatePerson(Person person) {
-
+    public void updatePerson(Person person) throws SQLException {
+        if (person == null) return;
+        personDao.updatePerson(person);
     }
 
     @Override
