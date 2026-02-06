@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>Text-Date-Time-Numeric-Objects</artifactId>
+    <artifactId>java21</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
