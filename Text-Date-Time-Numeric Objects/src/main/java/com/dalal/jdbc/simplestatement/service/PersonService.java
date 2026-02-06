@@ -8,7 +8,7 @@ import java.util.List;
 public interface PersonService {
     public void addPerson(Person person) throws SQLException;
     public void updatePerson(Person person);
-    public void deletePersonById(int id);
+    public void deletePersonById(int id) throws SQLException;
     public Person getPersonById(int id);
     public List<Person> getAllPersons() throws SQLException;
 }

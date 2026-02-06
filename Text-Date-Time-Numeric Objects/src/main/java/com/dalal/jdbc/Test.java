@@ -35,6 +35,13 @@ public class Test {
         return person;
 
     }
+
+    public static int readPersonId() throws SQLException {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter your person id:");
+        int id = sc.nextInt();
+        return id;
+    }
     public static void main(String[] args) throws SQLException {
         PersonServiceImpl personService = new PersonServiceImpl(new PersonDaoImpl());
         PersonController personController = new PersonController(personService);
@@ -46,6 +53,14 @@ public class Test {
 
         Person person = readPersonInfo();
         personService.addPerson(person);
+        personController.AllPersons();
+
+        System.out.println("************************************");
+        System.out.println("\t\tdelete person");
+        System.out.println("**********************************");
+
+        Integer id = readPersonId();
+        personService.deletePersonById(id);
         personController.AllPersons();
 
 

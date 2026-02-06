@@ -26,8 +26,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void deletePersonById(int id) {
-
+    public void deletePersonById(int id) throws SQLException {
+        Person person = personDao.getPersonById(id);
+        if (person == null) return;
+        personDao.deletePersonById(id);
     }
 
     @Override

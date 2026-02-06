@@ -35,8 +35,6 @@ public class PersonDaoImpl implements PersonDao {
         if (rows != 1) {
             throw new SQLException("insert error");
         }
-
-
     }
 
     @Override
@@ -45,13 +43,27 @@ public class PersonDaoImpl implements PersonDao {
     }
 
     @Override
-    public void deletePersonById(int id) {
-
+    public void deletePersonById(int id) throws SQLException {
+        String deleteQuery = "DELETE FROM personnes WHERE id=" + id;
+        int rowsDeleted = statement.executeUpdate(deleteQuery);
+        if (rowsDeleted != 1) {
+            throw new SQLException("delete error");
+        }
     }
 
     @Override
-    public Person getPersonById(int id) {
-        return null;
+    public Person getPersonById(int id) throws SQLException {
+        Person person = new Person();
+        String query = "SELECT * FROM personnes WHERE id = " + id;
+        statement.executeQuery(query);
+        ResultSet resultSet = statement.getResultSet();
+        if (resultSet.next()) {
+            person.setId(resultSet.getInt("id"));
+            person.setFirstName(resultSet.getString("firstName"));
+            person.setLastName(resultSet.getString("lastName"));
+            person.setAge(resultSet.getInt("age"));
+        }
+        return person;
     }
 
     @Override
