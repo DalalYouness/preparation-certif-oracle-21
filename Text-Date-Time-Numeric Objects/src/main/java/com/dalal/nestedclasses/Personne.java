@@ -43,7 +43,7 @@ public class Personne {
         System.out.println(nom + " " + prenom + " " + age);
     }
 
-    public void
+
 }
 
 
@@ -75,5 +75,5 @@ class Test {
     * kaywli flexible
     * */
 
-    Comparable
+
 }

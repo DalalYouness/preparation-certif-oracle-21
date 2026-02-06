@@ -1,11 +1,11 @@
-package com.dalal.jdbc.simplestatement.dao;
+package com.dalal.jdbc.simplestatement.service;
 
 import com.dalal.jdbc.simplestatement.entites.Person;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public interface PersonDao {
+public interface PersonService {
     public void addPerson(Person person);
     public void updatePerson(Person person);
     public void deletePersonById(int id);

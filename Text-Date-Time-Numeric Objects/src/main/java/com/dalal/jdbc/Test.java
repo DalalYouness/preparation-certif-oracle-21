@@ -1,6 +1,14 @@
 package com.dalal.jdbc;
 
 
+import com.dalal.jdbc.simplestatement.dao.PersonDao;
+import com.dalal.jdbc.simplestatement.dao.PersonDaoImpl;
+import com.dalal.jdbc.simplestatement.entites.Person;
+import com.dalal.jdbc.simplestatement.presentation.PersonController;
+import com.dalal.jdbc.simplestatement.service.PersonServiceImpl;
+
+import java.sql.SQLException;
+
 /*
 * ma3loma mohima rah les interfaces rah homa contract mais ahsan definition
 * lihom les interfaces decrivent comment definir certains implemntation
@@ -10,4 +18,10 @@ package com.dalal.jdbc;
 *
 * */
 public class Test {
+    public static void main(String[] args) throws SQLException {
+        PersonServiceImpl personService = new PersonServiceImpl(new PersonDaoImpl());
+        PersonController personController = new PersonController(personService);
+        personController.AllPersons();
+
+    }
 }

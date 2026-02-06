@@ -1,0 +1,23 @@
+package com.dalal.jdbc.simplestatement.presentation;
+
+import com.dalal.jdbc.simplestatement.entites.Person;
+import com.dalal.jdbc.simplestatement.service.PersonService;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public class PersonController {
+    private PersonService personService;
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
+    public void AllPersons() throws SQLException {
+        System.out.println("All Persons");
+        List<Person> allPersons = personService.getAllPersons();
+        System.out.println("**************************");
+        for (Person person : allPersons) {
+            System.out.println(person);
+        }
+        System.out.println("**************************");
+    }
+}
