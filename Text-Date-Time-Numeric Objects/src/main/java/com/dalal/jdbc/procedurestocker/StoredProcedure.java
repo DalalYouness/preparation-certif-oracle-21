@@ -29,6 +29,8 @@ public class StoredProcedure {
            listPersonne.add(person);
         }
 
+        /*on peut aussi utiliser une procedure stocker parametrer dans le input et le output*/
+
         listPersonne.forEach(System.out::println);
     }
 }
