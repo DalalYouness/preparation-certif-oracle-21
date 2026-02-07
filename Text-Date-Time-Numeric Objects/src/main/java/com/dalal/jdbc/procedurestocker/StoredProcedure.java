@@ -14,6 +14,7 @@ import java.util.List;
 
 public class StoredProcedure {
     public static void main(String[] args) throws SQLException {
+        /*call c'est standard meme si par exemple pour appeler une ps dans sql server c'est exec */
         Connection connection = ConnectionSingleton.getConnection();
         String storedProcedure = "{call listPersonne()}";
         CallableStatement callableStatement = connection.prepareCall(storedProcedure);
