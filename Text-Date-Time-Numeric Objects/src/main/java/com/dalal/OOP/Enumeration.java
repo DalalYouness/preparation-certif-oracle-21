@@ -6,6 +6,10 @@ public class Enumeration {
         Role role = Role.ADMIN; // kanrj3o la reference de l'objet admin de type role
         System.out.println(role);
         System.out.println(role.ordinal());
+
+
+        Conditon conditon = Conditon.COLD;
+        System.out.println(conditon.getMessage());
     }
 
 }
