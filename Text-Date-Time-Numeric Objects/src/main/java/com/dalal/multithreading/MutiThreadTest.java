@@ -1,6 +1,16 @@
 package com.dalal.multithreading;
 
-public class MutiThreadTest {
+public class MutiThreadTest implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("test runnable");
+    }
+
+    public static void main(String[] args) {
+        Thread t = new Thread(new MutiThreadTest());
+        t.start();
+
+    }
 }
 
 
