@@ -37,3 +37,11 @@ public class TestDownCasting {
 
     }
 }
+
+/*
+* this c'est variable dans laquell au moment de creation de l'objet la jvm le creer o kat3tih la reference
+* de l'objet courant et il le passe a chaque methode et chaque constructeur
+*
+*
+*
+* */

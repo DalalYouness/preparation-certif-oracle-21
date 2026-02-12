@@ -2,6 +2,7 @@ package com.dalal.OOP;
 
 public class Cat extends Animal {
     private  int footNumber;
+
     public Cat(String name, int age, int footNumber) {
         super(name, age);
         this.footNumber = footNumber;
