@@ -9,6 +9,9 @@ public class MutiThreadTest {
         for (int i = 0; i < 10; i++) {
             System.out.println("main thread " + i);
         };
+
+        // hadi mobachara sift l implementation dyal run fl constructeur
+        // sift comportement blama n7taj anani nsayab obj ki implemente l functionnal interface
        Thread t1 = new Thread(() ->{
            for (int i = 0; i < 10; i++) {
                System.out.println("Im thread 1");
@@ -23,6 +26,29 @@ public class MutiThreadTest {
            }
        });
        t2.start();
+
+       Runnable runnable = new Runnable() {
+           @Override
+           public void run() {
+               System.out.println("Im thread 3");
+               for (int i = 0; i < 10; i++) {
+                   System.out.println("i = " + i);
+               }
+           }
+       };
+       Thread thread = new Thread(runnable);
+       thread.start();
+
+       Thread thread2 = new Thread(new Runnable(){
+           @Override
+           public void run() {
+               System.out.println("Im thread 4");
+               for (int i = 0; i < 10; i++) {
+                   System.out.println("i = " + i);
+               }
+           }
+       });
+       thread2.start();
 
         System.out.println("im the end of ");
 
