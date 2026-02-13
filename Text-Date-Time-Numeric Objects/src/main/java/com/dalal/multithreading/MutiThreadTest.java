@@ -1,15 +1,30 @@
 package com.dalal.multithreading;
 
-public class MutiThreadTest implements Runnable {
-    @Override
-    public void run() {
+public class MutiThreadTest {
 
-        System.out.println("test runnable");
-    }
 
     public static void main(String[] args) {
-        Thread t = new Thread(new MutiThreadTest());
-        t.start();
+
+        System.out.println("im the begining of main thread");
+        for (int i = 0; i < 10; i++) {
+            System.out.println("main thread " + i);
+        };
+       Thread t1 = new Thread(() ->{
+           for (int i = 0; i < 10; i++) {
+               System.out.println("Im thread 1");
+               System.out.println("i = " + i);
+           }
+       });
+       t1.start();
+       Thread t2 = new Thread(()->{
+           for (int i = 0; i < 10; i++) {
+               System.out.println("Im thread 2");
+               System.out.println("i = " + i);
+           }
+       });
+       t2.start();
+
+        System.out.println("im the end of ");
 
     }
 }
