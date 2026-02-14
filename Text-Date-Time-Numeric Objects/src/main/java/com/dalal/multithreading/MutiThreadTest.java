@@ -1,72 +1,97 @@
 package com.dalal.multithreading;
 
-public class MutiThreadTest {
 
+import com.dalal.jdbc.Test;
 
-    public static void main(String[] args) {
-
-        System.out.println("im the begining of main thread");
+class TestThread {
+    public void iteration() {
+        System.out.println(Thread.currentThread().getName());
+        int sum = 0;
         for (int i = 0; i < 10; i++) {
-            System.out.println("main thread " + i);
-        };
-
-        // hadi mobachara sift l implementation dyal run fl constructeur
-        // sift comportement blama n7taj anani nsayab obj ki implemente l functionnal interface
-       Thread t1 = new Thread(() ->{
-           for (int i = 0; i < 10; i++) {
-               System.out.println("Im thread 1");
-               System.out.println("i = " + i);
-           }
-       });
-       t1.start();
-       Thread t2 = new Thread(()->{
-           for (int i = 0; i < 10; i++) {
-               System.out.println("Im thread 2");
-               System.out.println("i = " + i);
-           }
-       });
-       t2.start();
-
-       Runnable runnable = new Runnable() {
-           @Override
-           public void run() {
-               System.out.println("Im thread 3");
-               for (int i = 0; i < 10; i++) {
-                   System.out.println("i = " + i);
-               }
-           }
-       };
-       Thread thread = new Thread(runnable);
-       thread.start();
-
-       Thread thread2 = new Thread(new Runnable(){
-           @Override
-           public void run() {
-               System.out.println("Im thread 4");
-               for (int i = 0; i < 10; i++) {
-                   System.out.println("i = " + i);
-               }
-           }
-       });
-       thread2.start();
-
-        System.out.println("im the end of ");
-
+            sum += i;
+        }
+        System.out.println(Thread.currentThread().getName());
+        System.out.println("final result = " + sum);
     }
 }
+public class MutiThreadTest {
+    public static void main(String[] args) {
+
+//        System.out.println("im the begining of main thread");
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println("main thread " + i);
+//        };
+//
+//        // hadi mobachara sift l implementation dyal run fl constructeur
+//        // sift comportement blama n7taj anani nsayab obj ki implemente l functionnal interface
+//       Thread t1 = new Thread(() ->{
+//           for (int i = 0; i < 10; i++) {
+//               System.out.println("Im thread 1");
+//               System.out.println("i = " + i);
+//           }
+//       });
+//       t1.start();
+//       Thread t2 = new Thread(()->{
+//           for (int i = 0; i < 10; i++) {
+//               System.out.println("Im thread 2");
+//               System.out.println("i = " + i);
+//           }
+//       });
+//       t2.start();
+//
+//       Runnable runnable = new Runnable() {
+//           @Override
+//           public void run() {
+//               System.out.println("Im thread 3");
+//               for (int i = 0; i < 10; i++) {
+//                   System.out.println("i = " + i);
+//               }
+//           }
+//       };
+//       Thread thread = new Thread(runnable);
+//       thread.start();
+//
+//       Thread thread2 = new Thread(new Runnable(){
+//           @Override
+//           public void run() {
+//               System.out.println("Im thread 4");
+//               for (int i = 0; i < 10; i++) {
+//                   System.out.println("i = " + i);
+//               }
+//           }
+//       });
+//       thread2.start();
+//
+//        System.out.println("im the end of ");
+//
+//    }
+//}
+//
+
+        /*
+         * thread c'est un chemin d'execution howa l masar dyal
+         * cpu mnin kayqra man ram o kayktab fiha
+         * o multhread howa kaywliw 3adna bzf dyal lmasarat
+         *
+         * mnin kangolo un thread kayhjaz lih system d'exploitation stack whd 3an tariq system call
+         * dyal jvm c'est normale hit kola thread khashom ykhdmo f envi dyalo bodho
+         * mea les methode o kda o hdchi kaykhali ykono bzf dyal compies mais lheap dkchi li partager
+         * kaykon fih fhal object donc l aventage dyal heap anaho zone partagé:
+         * howa state shared hadi hiya aham haja hit 3adna nfs lobjet
+         * o zid kon kano les objects kol thread coipe dyalo f stack kon rah karita f ram
+         *
+         *
+         * */
+
+        TestThread objTest = new TestThread();
+        Thread t1 = new Thread(objTest::iteration); //run etitha reference dyal iteration bach takhodha ka delegation
+        t1.setName("Thread1");
+        Thread t2 = new Thread(objTest::iteration);
+        t2.setName("Thread2");
+        t1.start();
+        t2.start();
 
 
-/*
-* thread c'est un chemin d'execution howa l masar dyal
-* cpu mnin kayqra man ram o kayktab fiha
-* o multhread howa kaywliw 3adna bzf dyal lmasarat
-*
-* mnin kangolo un thread kayhjaz lih system d'exploitation stack whd 3an tariq system call
-* dyal jvm c'est normale hit kola thread khashom ykhdmo f envi dyalo bodho
-* mea les methode o kda o hdchi kaykhali ykono bzf dyal compies mais lheap dkchi li partager
-* kaykon fih fhal object donc l aventage dyal heap anaho zone partagé:
-* howa state shared hadi hiya aham haja hit 3adna nfs lobjet
-* o zid kon kano les objects kol thread coipe dyalo f stack kon rah karita f ram
-*
-*
-* */
+
+        }
+    }
